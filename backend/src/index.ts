@@ -9,6 +9,9 @@ app.use(express.json())
 
 // Routes
 
+app.all("*", (req: any, res: { json: (arg0: { msg: string }) => void }) => {
+  res.json({ msg: "star getting this" });
+});
 
 // Listen
 
