@@ -14,8 +14,8 @@ app.use(express.json())
 
 const PORT = 4000
 
-app.listen(PORT, (req: any, res: { json: (arg0: { msg: string }) => void }) => {
-res.json({msg: "I am ruuning"})
+app.listen(PORT, () => {
+
 console.log("I am running");
 
 
