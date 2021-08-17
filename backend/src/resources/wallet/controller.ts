@@ -38,7 +38,7 @@ function deleteWallet(req, res) {
     .delete({
       where: { id: id },
     })
-    .then((user) => res.json({ msg: `you deleted meeeee @ id no ${id}` }));
+    .then((user: {}) => res.json({ msg: `you deleted meeeee @ id no ${id}` }));
 }
 
 module.exports = {
