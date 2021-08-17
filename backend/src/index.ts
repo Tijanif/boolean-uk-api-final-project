@@ -1,5 +1,10 @@
+export {}
 const express = require("express");
 const morgan = require("morgan");
+
+const coinRouter = require('./resources/coin/router')
+const userRouter = require('./resources/user/router')
+const walletRouter = require('./resources/wallet/router')
 
 const app = express();
 

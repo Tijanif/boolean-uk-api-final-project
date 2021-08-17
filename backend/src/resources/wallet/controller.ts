@@ -1,7 +1,8 @@
-const { wallet } = require("../../utils/dbClient");
-const dbClient = require("../../utils/dbClient");
+export {}
+const { wallet } = require("../../../utilities/database");
+const dbClient = require("../../../utilities/database");
 
-function createOneWallet(req, res) {
+function createOneWallet(req: { body: any; }, res: { json: (arg0: { newWallet?: string; msg?: string; }) => void; }) {
   const newWallet = req.body;
   dbClient.wallet
     .create({ data: newWallet })
@@ -13,13 +14,13 @@ function createOneWallet(req, res) {
     });
 }
 
-function findAllWallets(req, res) {
+function findAllWallets(req: any, res: { json: (arg0: { allWallets: string[]; }) => any; }) {
   dbClient.wallet
     .findMany()
     .then((allWallets: string[]) => res.json({ allWallets }));
 }
 
-function updateWallet(req, res) {
+function updateWallet(req: { body: any; params: { id: string; }; }, res: { json: (arg0: { updatedWallet: string; }) => void; }) {
   const updatedWallet = req.body;
   const id = parseInt(req.params.id);
   dbClient.wallet
@@ -32,7 +33,7 @@ function updateWallet(req, res) {
     });
 }
 
-function deleteWallet(req, res) {
+function deleteWallet(req: { params: { id: string; }; }, res: { json: (arg0: { msg: string; }) => any; }) {
   const id = parseInt(req.params.id);
   dbClient.wallet
     .delete({
