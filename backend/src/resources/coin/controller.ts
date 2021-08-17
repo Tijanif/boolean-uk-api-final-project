@@ -1,7 +1,8 @@
-const { coin } = require("../../utils/dbClient");
-const dbClient = require("../../utils/dbClient");
+export {}
+const { coin } = require("../../../utilities/database")
+const dbClient = require("../../../utilities/database");
 
-function createOneCoin(req, res) {
+function createOneCoin(req: { body: any; }, res: { json: (arg0: { newCoin?: string; msg?: string; }) => void; }) {
   const newCoin = req.body;
   dbClient.coin
     .create({ data: newCoin })
@@ -13,11 +14,12 @@ function createOneCoin(req, res) {
     });
 }
 
-function findAllCoins(req, res) {
+
+function findAllCoins(req: any, res: { json: (arg0: { allCoins: string[]; }) => any; }) {
   dbClient.coin.findMany().then((allCoins: string[]) => res.json({ allCoins }));
 }
 
-function updateCoin(req, res) {
+function updateCoin(req: { body: any; params: { id: string; }; }, res: { json: (arg0: { updatedCoin: string; }) => void; }) {
   const updatedCoin = req.body;
   const id = parseInt(req.params.id);
   dbClient.coin
@@ -30,13 +32,13 @@ function updateCoin(req, res) {
     });
 }
 
-function deleteCoin(req, res) {
+function deleteCoin(req: { params: { id: string; }; }, res: { json: (arg0: { msg: string; }) => any; }) {
   const id = parseInt(req.params.id);
   dbClient.coin
     .delete({
       where: { id: id },
     })
-    .then((user) => res.json({ msg: `you deleted meeeee @ id no ${id}` }));
+    .then((user: any) => res.json({ msg: `you deleted meeeee @ id no ${id}` }));
 }
 
 module.exports = {

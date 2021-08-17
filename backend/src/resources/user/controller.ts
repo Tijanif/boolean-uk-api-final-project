@@ -1,7 +1,8 @@
-const { user } = require("../../utils/dbClient");
-const dbClient = require("../../utils/dbClient");
+export {}
+const { user } = require("../../../utilities/database")
+const dbClient = require("../../../utilities/database")
 
-function createOneUser(req, res) {
+function createOneUser(req: { body: any; }, res: { json: (arg0: { newUser?: string; msg?: string; }) => void; }) {
   const newUser = req.body;
   dbClient.user
     .create({ data: newUser })
@@ -13,11 +14,21 @@ function createOneUser(req, res) {
     });
 }
 
-function findAllUsers(req, res) {
+const findUserById = (req: { params: { id: any; }; }, res: any) => {
+  const id = Number(req.params.id)
+
+  dbClient.user.findUnique({
+    where: {id: id },
+   include: {
+     wallet: true,
+   }}).then((foundUser: any) => res.json(foundUser))
+}
+
+function findAllUsers(req: any, res: { json: (arg0: { allUsers: string[]; }) => any; }) {
   dbClient.user.findMany().then((allUsers: string[]) => res.json({ allUsers }));
 }
 
-function updateUser(req, res) {
+function updateUser(req: { body: any; params: { id: string; }; }, res: { json: (arg0: { updatedUser: string; }) => void; }) {
   const updatedUser = req.body;
   const id = parseInt(req.params.id);
   dbClient.user
@@ -30,13 +41,13 @@ function updateUser(req, res) {
     });
 }
 
-function deleteUser(req, res) {
+function deleteUser(req: { params: { id: string; }; }, res: { json: (arg0: { msg: string; }) => any; }) {
   const id = parseInt(req.params.id);
   dbClient.user
     .delete({
       where: { id: id },
     })
-    .then((user) => res.json({ msg: `you deleted meeeee @ id no ${id}` }));
+    .then((user: any) => res.json({ msg: `you deleted meeeee @ id no ${id}` }));
 }
 
 module.exports = {
@@ -44,4 +55,8 @@ module.exports = {
   findAllUsers,
   updateUser,
   deleteUser,
+  findUserById
 };
+
+
+

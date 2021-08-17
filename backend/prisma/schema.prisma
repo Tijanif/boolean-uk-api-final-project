@@ -26,20 +26,21 @@ model Wallet {
   id           Int            @id @default(autoincrement())
   userId       Int
   user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  coinInWallet coinInWallet[]
+  coinInWallet CoinInWallet[]
 }
 
 model Coin {
   id           Int            @id @default(autoincrement())
   name         String
   value        Int
-  coinInWallet coinInWallet[]
+  coinInWallet CoinInWallet[]
 }
 
-model coinInWallet {
+model CoinInWallet {
   id       Int    @id @default(autoincrement())
   walletId Int
   coinId   Int
+  amount   Int
   wallet   Wallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
   coin     Coin   @relation(fields: [coinId], references: [id], onDelete: Cascade)
 }

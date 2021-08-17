@@ -5,11 +5,14 @@ const {
   findAllUsers,
   updateUser,
   deleteUser,
+  findUserById
 } = require("./controller");
 
 userRouter.post("/", createOneUser);
 
 userRouter.get("/", findAllUsers);
+
+userRouter.get("/:id", findUserById);
 
 userRouter.patch("/:id", updateUser);
 
