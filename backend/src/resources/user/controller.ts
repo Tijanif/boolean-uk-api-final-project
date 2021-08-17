@@ -14,6 +14,16 @@ function createOneUser(req: { body: any; }, res: { json: (arg0: { newUser?: stri
     });
 }
 
+const findUserById = (req: { params: { id: any; }; }, res: any) => {
+  const id = Number(req.params.id)
+
+  dbClient.user.findUnique({
+    where: {id: id },
+   include: {
+     wallet: true,
+   }}).then((foundUser: any) => res.json(foundUser))
+}
+
 function findAllUsers(req: any, res: { json: (arg0: { allUsers: string[]; }) => any; }) {
   dbClient.user.findMany().then((allUsers: string[]) => res.json({ allUsers }));
 }
@@ -45,4 +55,8 @@ module.exports = {
   findAllUsers,
   updateUser,
   deleteUser,
+  findUserById
 };
+
+
+
