@@ -30,7 +30,11 @@ const getOneWalletbyID = (req: { params: { id: any; }; }, res: { json: (arg0: { 
     dbClient.wallet.findUnique({
       where: {id: walletToFindId},
       include: {
-        coinInWallet: true
+        coinInWallet: {
+            include: {
+               coin: true
+            }
+        }
       }
     }).then(((foundWallet: any) => res.json({foundWallet})))
 }

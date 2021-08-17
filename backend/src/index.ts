@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const coinRouter = require('./resources/coin/router')
 const userRouter = require('./resources/user/router')
 const walletRouter = require('./resources/wallet/router')
+const coinInWalletRouter = require('./resources/coinInWallet/router')
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use("/coins", coinRouter);
 app.use("/user", userRouter);
 app.use("/wallet", walletRouter);
+app.use('/coinInWallet', coinInWalletRouter)
 
 app.all("*", (req: any, res: { json: (arg0: { msg: string }) => void }) => {
   res.json({ msg: "star getting this" });
