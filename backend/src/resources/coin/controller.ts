@@ -14,6 +14,7 @@ function createOneCoin(req: { body: any; }, res: { json: (arg0: { newCoin?: stri
     });
 }
 
+
 function findAllCoins(req: any, res: { json: (arg0: { allCoins: string[]; }) => any; }) {
   dbClient.coin.findMany().then((allCoins: string[]) => res.json({ allCoins }));
 }
