@@ -1,11 +1,19 @@
 
 const users = [
  {
+  id: 1,
   userName: 'Lars',
   email: 'lars@lars.com',
   password: '12345',
   wallet: [{
-
+   id:1,
+   userId: 1,
+   coinWallet: {
+    id: 1,
+    walletId: 1,
+    coinId: 1,
+    amount: 3
+   }
   }]
  },
   {
