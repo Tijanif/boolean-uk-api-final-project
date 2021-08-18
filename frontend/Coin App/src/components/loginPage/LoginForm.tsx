@@ -9,7 +9,7 @@ export default function LoginForm(){
   password: ''
  })
 
-  function handleChange(event) {
+  function handleChange(event: { target: { name: any; value: any; }; }) {
     setNewUser({ ...newUser, [event.target.name]: event.target.value });
   }
 
