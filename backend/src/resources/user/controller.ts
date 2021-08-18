@@ -43,6 +43,7 @@ function updateUser(req: { body: any; params: { id: string; }; }, res: { json: (
 
 function deleteUser(req: { params: { id: string; }; }, res: { json: (arg0: { msg: string; }) => any; }) {
   const id = parseInt(req.params.id);
+ 
   dbClient.user
     .delete({
       where: { id: id },

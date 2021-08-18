@@ -31,26 +31,35 @@ async function seed() {
     })
   );
 
-  const createdCoinsInWallet = await dbClient.wallet.update({
-    where: {
-      // wallet Id
-      id: 1,
-    },
-    data: {
-      coinInWallet: {
-        create: {
-          amount: 150,
-          coin: {
-            connect: {
-              id: 1,
+  // let theRandomNumber = Math.floor(Math.random() * 3) + 1;
+
+  const randomNumber = (num1, num2) => {
+    return Math.floor(Math.random() * num1) + num2;
+  };
+
+  for (let i = 0; i < 10; i++) {
+    const createdCoinsInWallet = await dbClient.wallet.update({
+      where: {
+        // wallet Id
+        id: randomNumber(4, 1),
+      },
+      data: {
+        coinInWallet: {
+          create: {
+            amount: randomNumber(150, 1),
+            coin: {
+              connect: {
+                id: randomNumber(6, 1),
+              },
             },
           },
         },
       },
-    },
-  });
+    });
+    console.log(createdCoinsInWallet);
+  }
 
-  console.log(createdUsers, createdWallets, createdCoins, createdCoinsInWallet);
+  console.log(createdUsers, createdWallets, createdCoins);
 }
 
 seed()
