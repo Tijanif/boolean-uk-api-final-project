@@ -5,11 +5,7 @@ const dbClient = require('../../../utilities/database');
 function createOneUser(
   req: { body: any },
   res: {
-    json: (arg0: {
-      newWallet?: string;
-      newUser?: string;
-      msg?: string;
-    }) => void;
+    json: (arg0: { newUser?: User; msg?: string }) => void;
   }
 ) {
   const newUser = req.body;
@@ -31,7 +27,7 @@ function createOneUser(
             data: { ...newUser, wallet: { create: {} } },
             include: { wallet: true },
           })
-          .then((newUser: string) => {
+          .then((newUser: User) => {
             res.json({ newUser });
           })
           .catch((error: string) => {
