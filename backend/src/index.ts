@@ -1,32 +1,32 @@
-export {}
-const express = require("express");
-const morgan = require("morgan");
+export {};
+const express = require('express');
+const morgan = require('morgan');
+const cors = require('cors');
 
-const coinRouter = require('./resources/coin/router')
-const userRouter = require('./resources/user/router')
-const walletRouter = require('./resources/wallet/router')
-const coinInWalletRouter = require('./resources/coinInWallet/router')
+const coinRouter = require('./resources/coin/router');
+const userRouter = require('./resources/user/router');
+const walletRouter = require('./resources/wallet/router');
 
 const app = express();
 
 // Middleware
-app.use(morgan("dev"));
+app.use(cors());
+app.use(morgan('dev'));
 app.use(express.json());
 
 // Routes
 
-app.use("/coins", coinRouter);
-app.use("/user", userRouter);
-app.use("/wallet", walletRouter);
-app.use('/coinInWallet', coinInWalletRouter)
+app.use('/coins', coinRouter);
+app.use('/user', userRouter);
+app.use('/wallet', walletRouter);
 
-app.all("*", (req: any, res: { json: (arg0: { msg: string }) => void }) => {
-  res.json({ msg: "star getting this" });
+app.all('*', (req: any, res: { json: (arg0: { msg: string }) => void }) => {
+  res.json({ msg: 'star getting this' });
 });
 
 // Listen
 const PORT = 4000;
 
 app.listen(PORT, () => {
-  console.log("I am running");
+  console.log('I am running');
 });

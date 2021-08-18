@@ -1,34 +1,70 @@
-export {}
-const { user } = require("../../../utilities/database")
-const dbClient = require("../../../utilities/database")
+export {};
+import { User } from '@prisma/client';
+const dbClient = require('../../../utilities/database');
 
-function createOneUser(req: { body: any; }, res: { json: (arg0: { newUser?: string; msg?: string; }) => void; }) {
+function createOneUser(
+  req: { body: any },
+  res: {
+    json: (arg0: { newUser?: User; msg?: string }) => void;
+  }
+) {
   const newUser = req.body;
+  console.log(req.body);
+  const { userName } = req.body;
+  if (userName === null) throw new Error('Username undefined');
+  console.log(userName);
+
   dbClient.user
-    .create({ data: newUser })
-    .then((newUser: string) => {
-      res.json({ newUser });
+    .findUnique({
+      where: {
+        userName: userName,
+      },
     })
-    .catch((error: string) => {
-      res.json({ msg: "...you fucked up didn't ya son" });
+    .then((user: User) => {
+      if (!user) {
+        dbClient.user
+          .create({
+            data: { ...newUser, wallet: { create: {} } },
+            include: { wallet: true },
+          })
+          .then((newUser: User) => {
+            res.json({ newUser });
+          })
+          .catch((error: string) => {
+            res.json({ msg: error });
+          });
+      } else {
+        res.json({ msg: 'User already exist' });
+      }
     });
 }
 
-const findUserById = (req: { params: { id: any; }; }, res: any) => {
-  const id = Number(req.params.id)
+// if {typeof username !== string} return res.status(404).send('invalid username')
 
-  dbClient.user.findUnique({
-    where: {id: id },
-   include: {
-     wallet: true,
-   }}).then((foundUser: any) => res.json(foundUser))
-}
+const findUserById = (req: { params: { id: any } }, res: any) => {
+  const id = Number(req.params.id);
 
-function findAllUsers(req: any, res: { json: (arg0: { allUsers: string[]; }) => any; }) {
+  dbClient.user
+    .findUnique({
+      where: { id: id },
+      include: {
+        wallet: true,
+      },
+    })
+    .then((foundUser: any) => res.json(foundUser));
+};
+
+function findAllUsers(
+  req: any,
+  res: { json: (arg0: { allUsers: string[] }) => any }
+) {
   dbClient.user.findMany().then((allUsers: string[]) => res.json({ allUsers }));
 }
 
-function updateUser(req: { body: any; params: { id: string; }; }, res: { json: (arg0: { updatedUser: string; }) => void; }) {
+function updateUser(
+  req: { body: any; params: { id: string } },
+  res: { json: (arg0: { updatedUser: string }) => void }
+) {
   const updatedUser = req.body;
   const id = parseInt(req.params.id);
   dbClient.user
@@ -41,8 +77,12 @@ function updateUser(req: { body: any; params: { id: string; }; }, res: { json: (
     });
 }
 
-function deleteUser(req: { params: { id: string; }; }, res: { json: (arg0: { msg: string; }) => any; }) {
+function deleteUser(
+  req: { params: { id: string } },
+  res: { json: (arg0: { msg: string }) => any }
+) {
   const id = parseInt(req.params.id);
+
   dbClient.user
     .delete({
       where: { id: id },
@@ -55,8 +95,5 @@ module.exports = {
   findAllUsers,
   updateUser,
   deleteUser,
-  findUserById
+  findUserById,
 };
-
-
-
