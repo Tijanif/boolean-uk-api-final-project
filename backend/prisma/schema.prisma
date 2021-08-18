@@ -16,7 +16,7 @@ generator client {
 
 model User {
   id       Int      @id @default(autoincrement())
-  userName String
+  userName String   @unique
   email    String
   password String
   wallet   Wallet[]
