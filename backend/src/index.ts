@@ -1,6 +1,7 @@
 export {};
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 
 const coinRouter = require('./resources/coin/router');
 const userRouter = require('./resources/user/router');
@@ -9,6 +10,7 @@ const walletRouter = require('./resources/wallet/router');
 const app = express();
 
 // Middleware
+app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 

@@ -25,16 +25,19 @@ export type CoinType = {
 
 let basicUrl = 'http://localhost:4000'
 
-const useStore = create(set => ({
-    users: [],
-    fetchUser: () => {
-        fetch(`${basicUrl}/user`)
-            .then(resp => resp.json())
-            .then(usersFromServer => {
-                set({ users: usersFromServer })
-                console.log('users:', usersFromServer)
-            })
-    },
-}))
 
-export default useStore
+const useStore = create((set, get) => ({
+  usersList: [],
+  getUsers: () => {
+    fetch(`${basicUrl}/user`)
+      .then((resp) => resp.json())
+      .then((users) => {
+        console.log("users from server:", users);
+        
+        set({ usersList: users })
+      
+      });
+  },
+}));
+
+export default useStore;
