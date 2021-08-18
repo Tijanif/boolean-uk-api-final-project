@@ -1,5 +1,6 @@
 export {};
 
+import { Coin } from '@prisma/client';
 const dbClient = require('../../../utilities/database');
 
 function createOneCoin(
@@ -7,17 +8,28 @@ function createOneCoin(
   res: { json: (arg0: { newCoin?: string; msg?: string }) => void }
 ) {
   const { name, value } = req.body;
+  console.log(name, value);
 
-  if (typeof value === 'number') {
-    dbClient.coin
-      .create({ data: { name, value } })
-      .then((newCoin: string) => {
-        res.json({ newCoin });
-      })
-      .catch((error: string) => {
-        res.json({ msg: '...you fucked value is not a number' });
-      });
-  }
+  dbClient.coin
+    .findUnique({
+      where: {
+        name: name,
+      },
+    })
+    .then((coin: Coin) => {
+      if (!coin && typeof value === 'number') {
+        dbClient.coin
+          .create({ data: { name, value } })
+          .then((newCoin: string) => {
+            res.json({ newCoin });
+          })
+          .catch((error: string) => {
+            res.json({ msg: '...you fucked value is not a number' });
+          });
+      } else {
+        res.json({ msg: 'Coin already exist' });
+      }
+    });
 }
 
 function findAllCoins(
