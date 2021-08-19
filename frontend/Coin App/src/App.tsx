@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
-import Dashboard from "./pages/DashboardPage";
+
+import Dashboard from "./pages/DashboardPage"
 import LogInPage from "./pages/LoginPage";
 import Wallet from "./pages/WalletPage";
+
+
+import './App.css'
+import useStore from './store';
+
+
 
 import "./App.css";
 import useStore from "./store";

@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Link } from "react-router-dom";
 
 export default function AmendButton() {
@@ -9,4 +10,5 @@ export default function AmendButton() {
       </Link>
     </button>
   );
+
 }

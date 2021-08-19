@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Link } from "react-router-dom";
 import "../pages/WalletPageStyles.css";
 
@@ -10,4 +11,5 @@ export default function WalletButton() {
       </Link>
     </button>
   );
+
 }
