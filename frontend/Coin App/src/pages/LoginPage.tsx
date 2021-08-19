@@ -6,6 +6,7 @@ export default function LogInPage() {
   return (
     <div className="logInPageStyles">
       <LoginForm />
+
     </div>
   );
 }

@@ -1,6 +1,9 @@
 import React from "react";
+
 import CoinTable from "../components/CoinTable";
 import WalletButton from "../components/WalletButton";
+
+
 
 export default function Wallet() {
   return (

@@ -1,4 +1,5 @@
 import React from "react";
+
 import "../pages/WalletPageStyles.css";
 
 export default function CoinTable() {
@@ -7,6 +8,7 @@ export default function CoinTable() {
       <tr>
         <th className="heldCoins">COINS I HOLD</th>
         <th className="noOfCoins">QUANTITY OF COINS</th>
+
       </tr>
       <tr>
         <td>BITCOIN</td>
