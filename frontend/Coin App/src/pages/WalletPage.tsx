@@ -1,6 +1,6 @@
 import React from "react";
-import CoinTable from "../WalletPage/CoinTable";
-import WalletButton from "../WalletPage/WalletButton";
+import CoinTable from "../components/WalletPage/CoinTable";
+import WalletButton from "../components/WalletPage/WalletButton";
 
 export default function Wallet() {
   return (

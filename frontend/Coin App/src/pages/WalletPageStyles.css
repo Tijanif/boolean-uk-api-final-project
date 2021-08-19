@@ -1,0 +1,26 @@
+.WalletButton {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.5rem;
+  width: 50%;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.WalletButton:hover {
+  background-color: white;
+}
+
+.coinTable {
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.5rem;
+}
+
+.heldCoins,
+.noOfCoins {
+  border-bottom: 2px solid black;
+  padding-bottom: 0.5rem;
+}
