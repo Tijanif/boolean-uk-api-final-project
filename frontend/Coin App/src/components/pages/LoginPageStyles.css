@@ -1,0 +1,6 @@
+.logintitle {
+  font-family: "Raleway Dots", cursive;
+  font-size: 100px;
+}
+
+export default .logintitle
