@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../pages/LoginPageStyles.css";
 
 const initialFormState = {
@@ -25,7 +26,7 @@ export default function LoginForm() {
       email, 
       password
     }
-    console.log(newUserToCreate);
+   
     const createdUser  = await fetch(`http://localhost:4000/user/`, {
       method: "POST",
       headers: {
@@ -35,8 +36,12 @@ export default function LoginForm() {
     }).then(res => res.json());
 
     if(createdUser.Error){
-      console.log(Error); 
-    } else {
+       
+     console.log(Error);
+     
+       
+    } 
+    else {
       console.log('Created user:', createdUser);
       
     }
@@ -108,7 +113,13 @@ export default function LoginForm() {
       <p>
         By creating an account you agree to our <a href="#">Terms & Privacy</a>.
       </p>
-         <input className='form__submit' type='submit' value='Click to Sign In/Up' />
+      <Link to="/wallet/">
+        <input
+          className="form__submit"
+          type="submit"
+          value="Click to Sign In/Up"
+        />
+        </Link>
       {/* <button className="LogInButton">Click to Sign In/Up</button> */}
       {/* <p>Already have an account? <a href="#">Sign in</a>.</p> */}
     </form>

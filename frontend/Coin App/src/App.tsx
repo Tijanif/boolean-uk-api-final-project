@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Switch, Route } from "react-router-dom";
-import Dashboard from "./components/pages/Dashboard"
-import LogInPage from "./components/pages/LoginPage";
-import Wallet from "./components/pages/Wallet";
+import Dashboard from "./pages/DashboardPage"
+import LogInPage from "./pages/LoginPage";
+import Wallet from "./pages/WalletPage";
 
 
 import './App.css'
