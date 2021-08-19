@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
+
 import Dashboard from "./pages/DashboardPage"
 import LogInPage from "./pages/LoginPage";
 import Wallet from "./pages/WalletPage";
@@ -9,16 +10,18 @@ import './App.css'
 import useStore from './store';
 
 
-function App() {
-  const [user, setUser] = useState(null)
 
-    const getUsers = useStore((store) => store.getUsers);
+import "./App.css";
+import useStore from "./store";
+
+function App() {
+  const [user, setUser] = useState(null);
+
+  const getUsers = useStore((store) => store.getUsers);
   const usersList = useStore((store) => store.usersList);
 
   useEffect(() => {
     getUsers();
-    
-    
   }, []);
 
   // useEffect(() => {
@@ -26,53 +29,41 @@ function App() {
   //   .then(response => response.json())
   //   .then(data => setUser(data))
   // console.log('getting data', user);
-  
-    
+
   // },[])
 
-//   function getUsers() {
-//     return fetch("http://http://localhost:4000/users").then((response) =>
-//       response.json()
-//     );
-//   }
+  //   function getUsers() {
+  //     return fetch("http://http://localhost:4000/users").then((response) =>
+  //       response.json()
+  //     );
+  //   }
 
-// useEffect(() => {
-//     getUsers().then(setUser);
-//     console.log("from use effect", user);
-//   }, []);
+  // useEffect(() => {
+  //     getUsers().then(setUser);
+  //     console.log("from use effect", user);
+  //   }, []);
 
   return (
     <div className="App">
-      
+      <Switch>
+        <Route path="/login" exact>
+          <LogInPage />
+        </Route>
 
-        <Switch>
+        <Route path="/dashboard" exact>
+          <Dashboard />
+        </Route>
 
-          <Route path="/login" exact>
-            <LogInPage />
-          </Route>
+        <Route path="/wallet" exact>
+          <Wallet />
+        </Route>
 
-          <Route path="/dashboard" exact>
-            <Dashboard/>
-          </Route>
-
-          <Route path="/wallet" exact>
-         <Wallet />
-          </Route>
-
-          <Route>
-            <h3>Error 404</h3>
-          </Route>
-
-        </Switch>
-
+        <Route>
+          <h3>Error 404</h3>
+        </Route>
+      </Switch>
     </div>
-  )
+  );
 }
 
-export default App
-
-
-
-
-
-     
+export default App;
