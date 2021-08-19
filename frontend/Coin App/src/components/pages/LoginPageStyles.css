@@ -1,6 +1,18 @@
 .logintitle {
-  font-family: "Raleway Dots", cursive;
+  font-family: 'Raleway Dots', cursive;
   font-size: 100px;
 }
 
-export default .logintitle
+.form__submit {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.5rem;
+  width: 50%;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.form__submit:hover {
+  background-color: white;
+}
