@@ -1,13 +1,11 @@
 import React from "react";
 
-import LoginForm from "../loginPage/LoginForm";
+import LoginForm from "../components/loginPage/LoginForm";
 
 export default function LogInPage() {
-
   return (
     <div className="logInPageStyles">
-      <LoginForm/>
-      
+      <LoginForm />
     </div>
   );
 }
